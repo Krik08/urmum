@@ -1,49 +1,47 @@
-_G. Punch = false 
+_G.Click = false
+_G.Egg = false
+_G.Rebirth = false
 
 
 spawn(function()
-    
+	
 while wait() do
-    
-if _G.Punch == true then
-    
- 
+	
+if _G.Click == true then
 
-        local args = {
-            [1] = "Strength"
-        }
-        
-        game:GetService("ReplicatedStorage").Events.Train:FireServer(unpack(args))
-        wait()
-        
-       
+	local args = {
+		[1] = 1
+	}
+	
+	game:GetService("ReplicatedStorage").Events.Tap:FireServer(unpack(args))
+
 end
 end
-
 end)
 
+spawn(function ()
+	
+while wait() do
+	
+if _G.Rebirth == true then
+	
+local args = {
+    [1] = 20
+}
+
+game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(unpack(args))
 
 
+end
+end
+end)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--Libary
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
+--Window
 local Window = Rayfield:CreateWindow({
-	Name = "Rayfield Example Window",
+	Name = "Krik's Hub",
 	LoadingTitle = "Rayfield Interface Suite",
 	LoadingSubtitle = "by Sirius",
 	ConfigurationSaving = {
@@ -56,7 +54,7 @@ local Window = Rayfield:CreateWindow({
         	Invite = "sirius", -- The Discord invite code, do not include discord.gg/
         	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
         },
-	KeySystem = false, -- Set this to true to use our key system
+	KeySystem = true, -- Set this to true to use our key system
 	KeySettings = {
 		Title = "Sirius Hub",
 		Subtitle = "Key System",
@@ -64,20 +62,49 @@ local Window = Rayfield:CreateWindow({
 		FileName = "SiriusKey",
 		SaveKey = true,
 		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-		Key = "Hello"
+		Key = "nigger"
 	}
 })
 
-local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
+--Tabs
+local Tab = Window:CreateTab("LocalPlayer", 4483362458) -- Title, Image
+local Tab = Window:CreateTab("World", 4483362458) -- Title, Image
+local Tab = Window:CreateTab("Islands", 4483362458) -- Title, Image
 
+
+
+
+
+--toggles
 local Toggle = Tab:CreateToggle({
-	Name = "Toggle Example",
+	Name = "AutoClicker",
 	CurrentValue = false,
 	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
-		_G.Punch = Value
+		_G.Click = Value
+    		-- The variable (Value) is a boolean on whether the toggle is true or false
+	end,
+})
+
+local Toggle = Tab:CreateToggle({
+	Name = "AutoRebirth",
+	CurrentValue = false,
+	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		_G.Rebirth = Value
+    		-- The variable (Value) is a boolean on whether the toggle is true or false
 	end,
 })
 
 
-
+--dropdowns
+local Dropdown = Tab:CreateDropdown({
+	Name = "Eggs",
+	Options = {"StarterEgg","WoodEgg","JungleEgg"},
+	CurrentOption = "Select Egg",
+	Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Option)
+	  	 _G.Egg = Option
+    	  -- The variable (Option) is a string for the value that the dropdown was changed to
+	end,
+})
